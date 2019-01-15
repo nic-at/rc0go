@@ -13,22 +13,22 @@ import (
 type RRSetService service
 
 type RRType struct {
-	Name    *string   `json:"name"`
-	Rtype   *string   `json:"type"`
-	TTL     *int      `json:"ttl"`
-	Records *[]Record `json:"records"`
+	Name    string    `json:"name, omitempty"`
+	Type    string    `json:"type, omitempty"`
+	TTL     int       `json:"ttl, omitempty"`
+	Records []*Record `json:"records, omitempty"`
 }
 
 type Record struct {
-	Content  *string `json:"content"`
-	Disabled *bool   `json:"disabled"`
+	Content  string `json:"content, omitempty"`
+	Disabled bool   `json:"disabled, omitempty"`
 }
 
 type RRSetEdit struct {
-	Name 		*string   `json:"name"`
-	Type 		*string   `json:"type"`
-	ChangeType  *string   `json:"changetype"`
-	Records 	[]*Record `json:"records"`
+	Name 		string    `json:"name, omitempty"`
+	Type 		string    `json:"type, omitempty"`
+	ChangeType  string    `json:"changetype, omitempty"`
+	Records 	[]*Record `json:"records, omitempty"`
 }
 
 const (

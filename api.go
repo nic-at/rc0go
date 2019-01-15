@@ -213,19 +213,19 @@ const (
 	// The report is updated once every hour.
 	//
 	// rcode0 API docs: https://my.rcodezero.at/api-doc/#api-reports-reports-nxdomains
-	RC0ReportsNXDomains = "/reports/nxdomains{?day}"
+	RC0ReportsNXDomains = "/reports/nxdomains" //{?day}
 
 	// RC0ReportsAccounting is used for GET
 	// GET: get the accounting report per day for the given month as CSV
 	// Parameter: month Values: ‘YYYY-MM’
 	//
 	// rcode0 API docs: https://my.rcodezero.at/api-doc/#api-reports-reports-accounting
-	RC0ReportsAccounting = "/reports/accounting{?month}"
+	RC0ReportsAccounting = "/reports/accounting" //{?month}
 
 	// RC0ReportsQueryrates is used for GET
 	// GET: get the number of queries per domain and day for the given month as CSV
 	// Parameter: month Values: ‘YYYY-MM’
 	//
 	// rcode0 API docs: https://my.rcodezero.at/api-doc/#api-reports-reports-queryrates
-	RC0ReportsQueryrates = "/reports/nxdomains{?month}"
+	RC0ReportsQueryrates = "/reports/nxdomains" //{?month}
 )

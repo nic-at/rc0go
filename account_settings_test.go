@@ -20,10 +20,10 @@ func TestAccSettingsService_Get(t *testing.T) {
 	defer teardown()
 
 	want := &GlobalSetting{
-		Secondaries: &[]string{
+		Secondaries: []string{
 			"10.10.1.2",
 		},
-		TSIGOut: String("mystigkey,hmac-sha256,BqpFrSK+zsvYDJ0oXZzfs3R6VVxabW3RL4GLTM/fm2QGQbvDIUZHWVzNXbAEYOC77EZFC+B4RfrdLE6soeQKUw=="),
+		TSIGOut: "mystigkey,hmac-sha256,BqpFrSK+zsvYDJ0oXZzfs3R6VVxabW3RL4GLTM/fm2QGQbvDIUZHWVzNXbAEYOC77EZFC+B4RfrdLE6soeQKUw==",
 	}
 
 	mux.HandleFunc(RC0AccSettings, func(w http.ResponseWriter, r *http.Request) {
@@ -59,7 +59,7 @@ func TestAccSettingsService_SetSecondaries(t *testing.T) {
 		},
 	}
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Setting secondaries successfully configured")}
+	want := &StatusResponse{Status: "ok", Message: "Setting secondaries successfully configured"}
 
 	mux.HandleFunc(RC0AccSecondaries, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "PUT")
@@ -97,7 +97,7 @@ func TestAccSettingsService_RemoveTSIG(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Setting tsigout successfully deleted")}
+	want := &StatusResponse{Status: "ok", Message: "Setting tsigout successfully deleted"}
 
 	mux.HandleFunc(RC0AccTsigout, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "DELETE")
@@ -123,14 +123,14 @@ func TestAccSettingsService_SetTSIG(t *testing.T) {
 	defer teardown()
 
 	type tsigkey struct {
-		TSIGKey *string `json:"tsigkey"`
+		TSIGKey string `json:"tsigkey"`
 	}
 
 	_tsigkey := &tsigkey{
-		TSIGKey: String("10.10.1.2"),
+		TSIGKey: "10.10.1.2",
 	}
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Setting tsigout successfully configured")}
+	want := &StatusResponse{Status: "ok", Message: "Setting tsigout successfully configured"}
 
 	mux.HandleFunc(RC0AccTsigout, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "PUT")
@@ -152,7 +152,7 @@ func TestAccSettingsService_SetTSIG(t *testing.T) {
 		_, _ = fmt.Fprint(w, string(_json))
 	})
 
-	status, err := client.Settings.SetTSIG(*_tsigkey.TSIGKey)
+	status, err := client.Settings.SetTSIG(_tsigkey.TSIGKey)
 	if err != nil {
 		t.Errorf("Settings.SetTSIG returned error: %v", err)
 	}
@@ -168,7 +168,7 @@ func TestAccSettingsService_RemoveSecondaries(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Setting secondaries successfully deleted")}
+	want := &StatusResponse{Status: "ok", Message: "Setting secondaries successfully deleted"}
 
 	mux.HandleFunc(RC0AccSecondaries, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "DELETE")

@@ -19,11 +19,11 @@ func TestMessageService_GetLatest(t *testing.T) {
 	defer teardown()
 
 	want := &Message{
-		ID: Int(56007),
-		Domain: String("testzone2.at"),
-		Date: String("2018-04-09T09:31:14Z"),
-		Type: String("DSSEEN"),
-		Comment: String("Simulate that the DS record has been seen in the parent zone."),
+		ID: 56007,
+		Domain: "testzone2.at",
+		Date: "2018-04-09T09:31:14Z",
+		Type: "DSSEEN",
+		Comment: "Simulate that the DS record has been seen in the parent zone.",
 	}
 
 	mux.HandleFunc(RC0Messages, func(w http.ResponseWriter, r *http.Request) {
@@ -49,7 +49,7 @@ func TestMessageService_AckAndDelete(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Acknowledged notification '56007'")}
+	want := &StatusResponse{Status: "ok", Message: "Acknowledged notification '56007'"}
 
 	mux.HandleFunc(RC0AckMessage, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "DELETE")

@@ -13,13 +13,13 @@ import (
 type ReportService service
 
 type ProbZone struct {
-	Domain    *string `json:"domain"`
-	Type 	  *string `json:"type"`
-	DNSSEC    *string `json:"dnssec"`
-	Created   *string `json:"created"`
-	LastCheck *string `json:"last_check"`
-	Serial    *interface{} 	 `json:"serial"`
-	Masters   *[]string `json:"masters"`
+	Domain    string 		`json:"domain, omitempty"`
+	Type 	  string 		`json:"type, omitempty"`
+	DNSSEC    string 		`json:"dnssec, omitempty"`
+	Created   string 		`json:"created, omitempty"`
+	LastCheck string 	 	`json:"last_check, omitempty"`
+	Serial    interface{} 	`json:"serial, omitempty"`
+	Masters   []string 	 	`json:"masters, omitempty"`
 }
 
 // Returns the list of problematic zones (=zones with could not be checked or transferred successfully from the master server)
@@ -57,6 +57,7 @@ func (s *ReportService) ProblematicZones() ([]*ProbZone, *Page, error) {
 	return zones, page, nil
 }
 
+// @todo
 //func (s *ReportService) NXDomains(day string) (?, error) {}
 //func (s *ReportService) Accounting(month string) (?, error) {}
 //func (s *ReportService) Queryrates(month string) (?, error) {}

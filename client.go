@@ -60,21 +60,21 @@ type service struct {
 }
 
 type StatusResponse struct {
-	Status  *string `json:"status"`
-	Message *string `json:"message"`
+	Status  string `json:"status, omitempty"`
+	Message string `json:"message, omitempty"`
 }
 
 type Page struct {
-	Data        []interface{}  `json:"data"`
-	CurrentPage *int           `json:"current_page"`
-	From        *int           `json:"from"`
-	LastPage    *int           `json:"last_page"`
-	NextPageURL *string        `json:"next_page_url"`
-	Path        *string        `json:"path"`
-	PerPage     *int           `json:"per_page"`
-	PrevPageURL *string        `json:"prev_page_url"`
-	To          *int           `json:"to"`
-	Total       *int           `json:"total"`
+	Data        []interface{} `json:"data"`
+	CurrentPage int           `json:"current_page, omitempty"`
+	From        int           `json:"from, omitempty"`
+	LastPage    int           `json:"last_page, omitempty"`
+	NextPageURL string        `json:"next_page_url, omitempty"`
+	Path        string        `json:"path, omitempty"`
+	PerPage     int           `json:"per_page, omitempty"`
+	PrevPageURL string        `json:"prev_page_url, omitempty"`
+	To          int           `json:"to, omitempty"`
+	Total       int           `json:"total, omitempty"`
 }
 
 // NewClient returns a new rcode0 API client.
@@ -126,11 +126,3 @@ func (c *Client) ResponseToRC0StatusResponse(response *resty.Response) (*StatusR
 
 	return statusResponse, nil
 }
-
-func String(s string) *string { return &s }
-
-func Int(i int) *int { return &i }
-
-func Float32(f float32) *float32 { return &f }
-
-func Bool(b bool) *bool { return &b }

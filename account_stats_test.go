@@ -22,9 +22,9 @@ func TestAccountStatsService_TopMagnitude(t *testing.T) {
 
 	want := []*TopMagnitude{
 		{
-			Domain:    String("testzone1.at"),
-			Magnitude: Float32(4.2),
-			ID:        Int(324234324),
+			Domain:    "testzone1.at",
+			Magnitude: 4.2,
+			ID:        324234324,
 		},
 	}
 
@@ -67,12 +67,12 @@ func TestAccountStatsService_TopNXDomains(t *testing.T) {
 
 	want := []*TopNXDomain{
 		{
-			ID: Int(213123),
-			Domain: String("testzone1.at"),
+			ID: 213123,
+			Domain: "testzone1.at",
 			NXDomain: NXDomain{
-				Type:String("A"),
-				Name: String("nosuchlabel.testzone1.at"),
-				Count: Int(2034),
+				Type:"A",
+				Name: "nosuchlabel.testzone1.at",
+				Count: 2034,
 			},
 		},
 	}
@@ -116,12 +116,12 @@ func TestAccountStatsService_TopQNames(t *testing.T) {
 
 	want := []*TopQuery{
 		{
-			ID: Int(213123),
-			Domain: String("testzone.at"),
+			ID: 213123,
+			Domain: "testzone.at",
 			Query: Query{
-				Name: String("www.testzone1.at."),
-				Type: String("A"),
-				Count: Int(2034555),
+				Name: "www.testzone1.at.",
+				Type: "A",
+				Count: 2034555,
 			},
 		},
 	}
@@ -165,9 +165,9 @@ func TestAccountStatsService_TopZones(t *testing.T) {
 
 	want := []*TopZone{
 		{
-			ID: Int(324234324),
-			Domain: String("testzone1.at"),
-			Count: Int(2034),
+			ID: 324234324,
+			Domain: "testzone1.at",
+			Count: 2034,
 		},
 	}
 
@@ -210,9 +210,9 @@ func TestAccountStatsService_TotalQueryCount(t *testing.T) {
 
 	want := []*QueryCount{
 		{
-			Date: String("2018-02-24"),
-			Count: Int(3213123),
-			NXCount: Int(76642),
+			Date: "2018-02-24",
+			Count: 3213123,
+			NXCount: 76642,
 		},
 	}
 
@@ -255,11 +255,11 @@ func TestAccountStatsService_TotalQueryCountPerCountry(t *testing.T) {
 
 	want := []*CountryQueryCount{
 		{
-			CountryCode: String("AT"),
-			Country: String("Austria"),
-			Region: String("Europe"),
-			Subregion: String("Western Europe"),
-			QueryCount: Int(10353087),
+			CountryCode: "AT",
+			Country: "Austria",
+			Region: "Europe",
+			Subregion: "Western Europe",
+			QueryCount: 10353087,
 		},
 	}
 

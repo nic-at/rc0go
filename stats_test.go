@@ -19,8 +19,8 @@ func TestZoneStatsService_Magnitude(t *testing.T) {
 	defer teardown()
 
 	wantMagnitude := &Magnitude{
-		Magnitude: String("4.2"),
-		Date: String("2018-3-2"),
+		Magnitude: "4.2",
+		Date: "2018-3-2",
 	}
 
 	_json, _ := json.Marshal([]interface{}{wantMagnitude})
@@ -53,9 +53,9 @@ func TestZoneStatsService_NXDomains(t *testing.T) {
 	defer teardown()
 
 	wantNXDomains := &NXDomain{
-		Type: String("A"),
-		Count: Int(2034555),
-		Name: String("wwww.testzone1.at."),
+		Type: "A",
+		Count: 2034555,
+		Name: "wwww.testzone1.at.",
 	}
 
 	_json, _ := json.Marshal([]interface{}{wantNXDomains})
@@ -88,9 +88,9 @@ func TestZoneStatsService_QNames(t *testing.T) {
 	defer teardown()
 
 	wantQName := &Query{
-		Name: String("wwww.testzone1.at."),
-		Type: String("A"),
-		Count: Int(2034555),
+		Name: "wwww.testzone1.at.",
+		Type: "A",
+		Count: 2034555,
 	}
 
 	_json, _ := json.Marshal([]interface{}{wantQName})
@@ -123,9 +123,9 @@ func TestZoneStatsService_Queries(t *testing.T) {
 	defer teardown()
 
 	wantQueries := &PerDay{
-		Date: String("2018-3-25"),
-		Queries: Int(312355),
-		NXDomains: Int(2132),
+		Date: "2018-3-25",
+		Queries: 312355,
+		NXDomains: 2132,
 	}
 
 	_json, _ := json.Marshal([]interface{}{wantQueries})

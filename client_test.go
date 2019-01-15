@@ -83,7 +83,7 @@ func getSampleZone() map[string]interface{} {
 		"type": "SLAVE",
 		"dnssec": "yes",
 		"created": "2018-04-09T09:27:31Z",
-		"serial": "20180411",
+		"serial": 20180411,
 		"masters": []string{
 			"193.0.2.2",
 			"2001:db8::2",

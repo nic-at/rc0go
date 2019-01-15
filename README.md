@@ -27,11 +27,11 @@ zone, err := rc0client.Zones.Get("rcodezero.at")
 
 // Add an "A" DNS resource record to the
 rrsetCreate := []*rc0go.RRSetEdit{{
-    Type: 		rc0go.String("A"),
-    Name: 		rc0go.String("www.rcodezero.at."),
-    ChangeType: rc0go.String(rc0go.ChangeTypeADD),
+    Type: 		"A",
+    Name: 		"www.rcodezero.at.",
+    ChangeType: rc0go.ChangeTypeADD,
     Records:    []*rc0go.Record{{
-        Content: rc0go.String("10.10.0.1"),
+        Content: "10.10.0.1",
     }},
 }}
 
@@ -68,15 +68,15 @@ Status response is defined in `rc0go.StatusResponse` struct and contains only tw
 
 ```go
 statusResponse, err := rc0client.Zones.Create("rcodezero.at", "master", []string{})
-if eq := strings.Compare("ok", *statusResponse.Status); eq != 0 {
-    log.Println("Error: " + *statusResponse.Message)
+if eq := strings.Compare("ok", statusResponse.Status); eq != 0 {
+    log.Println("Error: " + statusResponse.Message)
 }
 ```
 	
 ## Pagination ##
 
 Some requests (like listing managed zones or rrsets) support pagination. Pagination is defined in the
-rc0go.Page struct (with original data returned within rc0go.Page.Data field). Pagination options will be supported soon.
+`rc0go.Page` struct (with original data returned within rc0go.Page.Data field). Pagination options will be supported soon.
 
 ## Contributing ##
 

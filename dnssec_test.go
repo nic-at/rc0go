@@ -18,7 +18,7 @@ func TestDNSSECService_Sign(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Zone testzone1.at signed successfully")}
+	want := &StatusResponse{Status: "ok", Message: "Zone testzone1.at signed successfully"}
 
 	mux.HandleFunc(RC0ZoneDNSSecSign, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")
@@ -42,7 +42,7 @@ func TestDNSSECService_Unsign(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Zone testzone1.at unsigned successfully")}
+	want := &StatusResponse{Status: "ok", Message: "Zone testzone1.at unsigned successfully"}
 
 	mux.HandleFunc(RC0ZoneDNSSecUnsign, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")
@@ -66,7 +66,7 @@ func TestDNSSECService_KeyRollover(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Key rollover started successfully.")}
+	want := &StatusResponse{Status: "ok", Message: "Key rollover started successfully."}
 
 	mux.HandleFunc(RC0ZoneDNSSecKeyRollover, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")
@@ -90,7 +90,7 @@ func TestDNSSECService_DSUpdate(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Acknowledged KSK for domain 'testzone1.at'.")}
+	want := &StatusResponse{Status: "ok", Message: "Acknowledged KSK for domain 'testzone1.at'."}
 
 	mux.HandleFunc(RC0ZoneDNSSecDSUpdate, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")
@@ -114,7 +114,7 @@ func TestDNSSECService_SimulateDSSEENEvent(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("simulate ok: Simulated DSSSEN. Had to update 1 keys for zone 'testzone1.at'")}
+	want := &StatusResponse{Status: "ok", Message: "simulate ok: Simulated DSSSEN. Had to update 1 keys for zone 'testzone1.at'"}
 
 	mux.HandleFunc(RC0ZoneDNSSecDSSEEN, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")
@@ -138,7 +138,7 @@ func TestDNSSECService_SimulateDSREMOVEDEvent(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("simulate ok: Simulated DSREMOVED. Had to update 1 keys for zone 'testzone1.at'")}
+	want := &StatusResponse{Status: "ok", Message: "simulate ok: Simulated DSREMOVED. Had to update 1 keys for zone 'testzone1.at'"}
 
 	mux.HandleFunc(RC0ZoneDNSSecDSREMOVED, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")

@@ -100,15 +100,15 @@ func TestZoneManagementService_Create(t *testing.T) {
 	defer teardown()
 
 	zoneCreate := &ZoneCreate{
-		Domain: String("testzone1.at"),
-		Type: String("slave"),
-		Masters: &[]string{
+		Domain: "testzone1.at",
+		Type: "slave",
+		Masters: []string{
 			"193.0.2.2",
 			"2001:db8::2",
 		},
 	}
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Zone testzone1.at successfully added")}
+	want := &StatusResponse{Status: "ok", Message: "Zone testzone1.at successfully added"}
 
 	mux.HandleFunc(RC0Zones, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")
@@ -147,14 +147,14 @@ func TestZoneManagementService_Edit(t *testing.T) {
 	defer teardown()
 
 	zoneEdit := &ZoneEdit{
-		Type: String("slave"),
-		Masters: &[]string{
+		Type: "slave",
+		Masters: []string{
 			"193.0.2.2",
 			"2001:db8::2",
 		},
 	}
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Zone testzone1.at successfully updated")}
+	want := &StatusResponse{Status: "ok", Message: "Zone testzone1.at successfully updated"}
 
 	mux.HandleFunc(RC0Zone, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "PUT")
@@ -192,7 +192,7 @@ func TestZoneManagementService_Delete(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Zone testzone1.at successfully removed")}
+	want := &StatusResponse{Status: "ok", Message: "Zone testzone1.at successfully removed"}
 
 	mux.HandleFunc(RC0Zone, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "DELETE")
@@ -217,7 +217,7 @@ func TestZoneManagementService_Transfer(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	want := &StatusResponse{Status: String("ok"), Message: String("Zonetransfer for zone testzone1.at queued")}
+	want := &StatusResponse{Status: "ok", Message: "Zonetransfer for zone testzone1.at queued"}
 
 	mux.HandleFunc(RC0ZoneTransfer, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "POST")

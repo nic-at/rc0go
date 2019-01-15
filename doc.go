@@ -31,11 +31,11 @@ access different parts of the rcode0 Anycast DNS API. For example:
 
 	// Add an "A" DNS resource record to the zone
 	rrsetCreate := []*rc0go.RRSetEdit{{
-		Type: 		rc0go.String("A"),
-		Name: 		rc0go.String("www.rcodezero.at."),
-		ChangeType: rc0go.String(rc0go.ChangeTypeADD),
+		Type: 		"A",
+		Name: 		"www.rcodezero.at.",
+		ChangeType: rc0go.ChangeTypeADD,
 		Records:    []*rc0go.Record{{
-			Content: rc0go.String("10.10.0.1"),
+			Content: "10.10.0.1",
 		}},
 	}}
 
@@ -70,8 +70,8 @@ Some endpoints (like adding a new zone to rcode0) return a 201 Created status co
 Status response is defined in rc0go.StatusResponse struct and contains only two fields - status and message.
 
 	statusResponse, err := rc0client.Zones.Create("rcodezero.at", "master", []string{})
-	if eq := strings.Compare("ok", *statusResponse.Status); eq != 0 {
-		log.Println("Error: " + *statusResponse.Message)
+	if eq := strings.Compare("ok", statusResponse.Status); eq != 0 {
+		log.Println("Error: " + statusResponse.Message)
 	}
 
 Pagination

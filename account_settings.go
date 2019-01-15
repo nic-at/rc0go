@@ -10,8 +10,8 @@ import "encoding/json"
 type AccSettingsService service
 
 type GlobalSetting struct {
-	Secondaries *[]string `json:"secondaries"`
-	TSIGOut 	*string   `json:"tsigout"`
+	Secondaries []string `json:"secondaries"`
+	TSIGOut 	string   `json:"tsigout"`
 }
 
 // Get global account settings. Value will be empty if an individual setting is not configured.

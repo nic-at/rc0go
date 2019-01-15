@@ -13,11 +13,11 @@ import (
 type MessageService service
 
 type Message struct {
-	ID 		*int   	`json:"id"`
-	Domain 	*string `json:"domain"`
-	Date 	*string `json:"date"`
-	Type 	*string `json:"type"`
-	Comment *string `json:"comment"`
+	ID 		int   	`json:"id"`
+	Domain 	string `json:"domain"`
+	Date 	string `json:"date"`
+	Type 	string `json:"type"`
+	Comment string `json:"comment"`
 }
 
 // Retrieves the oldest unacknowledged message from the message queue
@@ -67,7 +67,7 @@ func (s *MessageService) AckAndDelete(id int) (*StatusResponse, error){
 			return nil, err
 		}
 
-		return nil, errors.New(*status.Message)
+		return nil, errors.New(status.Message)
 	}
 
 	if err != nil {

@@ -15,44 +15,44 @@ type AccountStatsService service
 
 //
 type TopZone struct {
-	ID     *int    `json:"id"`
-	Domain *string `json:"domain"`
-	Count  *int    `json:"qc"`
+	ID     int    `json:"id, omitempty"`
+	Domain string `json:"domain, omitempty"`
+	Count  int    `json:"qc, omitempty"`
 }
 
 //
 type TopQuery struct {
 	Query
-	ID     *int    `json:"id"`
-	Domain *string `json:"domain"`
+	ID     int    `json:"id, omitempty"`
+	Domain string `json:"domain, omitempty"`
 }
 
 //
 type TopNXDomain struct {
 	NXDomain
-	ID     *int    `json:"id"`
-	Domain *string `json:"domain"`
+	ID     int    `json:"id, omitempty"`
+	Domain string `json:"domain, omitempty"`
 }
 
 //
 type TopMagnitude struct {
-	ID        *int     `json:"id"`
-	Domain    *string  `json:"domain"`
-	Magnitude *float32 `json:"mag"`
+	ID        int     `json:"id, omitempty"`
+	Domain    string  `json:"domain, omitempty"`
+	Magnitude float32 `json:"mag, omitempty"`
 }
 
 type QueryCount struct {
-	Date  	*string `json:"date"`
-	Count 	*int    `json:"count"`
-	NXCount *int	   `json:"nxcount"`
+	Date  	string `json:"date, omitempty"`
+	Count 	int    `json:"count, omitempty"`
+	NXCount int	   `json:"nxcount, omitempty"`
 }
 
 type CountryQueryCount struct {
-	CountryCode *string `json:"cc"`
-	Country 	*string `json:"country"`
-	Region 		*string `json:"region"`
-	Subregion 	*string `json:"subregion"`
-	QueryCount 	*int    `json:"qc"`
+	CountryCode string `json:"cc, omitempty"`
+	Country 	string `json:"country, omitempty"`
+	Region 		string `json:"region, omitempty"`
+	Subregion 	string `json:"subregion, omitempty"`
+	QueryCount 	int    `json:"qc, omitempty"`
 }
 
 // Return the Top 1000 zones from your account with the highest number of queries in the given past period

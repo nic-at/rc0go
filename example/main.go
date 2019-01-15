@@ -43,7 +43,7 @@ func main() {
 	log.Println()
 	log.Println("Type: \t\t\t", 		reflect.TypeOf(zones))
 	log.Println("Domaincount: \t", 	len(zones))
-	log.Println("First Domain:\t", 	*zones[0].Domain)
+	log.Println("First Domain:\t", 	zones[0].Domain)
 	log.Println()
 
 	// Get a single managed zone by name
@@ -56,18 +56,18 @@ func main() {
 	log.Println("rc0client.Zones.Get:")
 	log.Println()
 	log.Println("TypeOf: \t\t", 		reflect.TypeOf(zone))
-	log.Println("Domain: \t\t", 		*zone.Domain)
-	log.Println("Type: \t\t\t", 		*zone.Type)
-	log.Println("ID: \t\t\t", 		*zone.ID)
-	log.Println("DNSSECStatus: \t", 	*zone.DNSSECStatus)
-	log.Println("Serial: \t\t", 		*zone.Serial)
+	log.Println("Domain: \t\t", 		zone.Domain)
+	log.Println("Type: \t\t\t", 		zone.Type)
+	log.Println("ID: \t\t\t", 		zone.ID)
+	log.Println("DNSSECStatus: \t", 	zone.DNSSECStatus)
+	log.Println("Serial: \t\t", 		zone.Serial)
 	log.Println()
 
 	// Add a new zone to rcode0
 	zoneCreateRequest := &rc0go.ZoneCreate{
-		Type: 		rc0go.String("master"),
-		Domain: 	rc0go.String("golib-example.at"),
-		Masters: 	&[]string{},
+		Type: 		"master",
+		Domain: 	"golib-example.at",
+		Masters: 	[]string{},
 	}
 
 	statusResponse, err := rc0client.Zones.Create(zoneCreateRequest)
@@ -79,45 +79,45 @@ func main() {
 	log.Println("rc0client.Zones.Create:")
 	log.Println()
 	log.Println("Type: \t\t\t", 		 reflect.TypeOf(statusResponse))
-	log.Println("Status: \t\t", 		 *statusResponse.Status)
-	log.Println("Status Message:\t",	 *statusResponse.Message)
+	log.Println("Status: \t\t", 		 statusResponse.Status)
+	log.Println("Status Message:\t",	 statusResponse.Message)
 	log.Println()
 
 	// Add few A RRs to the newly added zone
 	var records []*rc0go.Record
 
 	record1 		   := &rc0go.Record{
-		Content:  rc0go.String("127.0.0.1"),
-		Disabled: rc0go.Bool(false),
+		Content:  "127.0.0.1",
+		Disabled: false,
 	}
 
 	records = append(records, record1)
 
 	record2 		   := &rc0go.Record{
-		Content:  rc0go.String("127.0.0.2"),
-		Disabled: rc0go.Bool(false),
+		Content:  "127.0.0.2",
+		Disabled: false,
 	}
 
 	records = append(records, record2)
 
 	rrsetCreate := []*rc0go.RRSetEdit{{
-		Type: 		rc0go.String("A"),
-		Name: 		rc0go.String("www.golib-example.at."),
-		ChangeType: rc0go.String(rc0go.ChangeTypeADD),
+		Type: 		"A",
+		Name: 		"www.golib-example.at.",
+		ChangeType: rc0go.ChangeTypeADD,
 		Records:  	records,
 	}}
 
 	statusResponse, err = rc0client.RRSet.Create("golib-example.at", rrsetCreate)
 
-	if eq := strings.Compare("ok", *statusResponse.Status); eq != 0 {
-		log.Fatalf("failed to add rrset: %v", *statusResponse.Message)
+	if eq := strings.Compare("ok", statusResponse.Status); eq != 0 {
+		log.Fatalf("failed to add rrset: %v", statusResponse.Message)
 	}
 
 	log.Println("rc0client.RRSet.Create:")
 	log.Println()
 	log.Println("Type: \t\t\t", 		 reflect.TypeOf(statusResponse))
-	log.Println("Status: \t\t", 		 *statusResponse.Status)
-	log.Println("Status Message:\t",	 *statusResponse.Message)
+	log.Println("Status: \t\t", 		 statusResponse.Status)
+	log.Println("Status Message:\t",	 statusResponse.Message)
 	log.Println()
 
 	// Remove the example zone from rcode0
@@ -130,7 +130,7 @@ func main() {
 	log.Println("rc0client.Zones.Delete:")
 	log.Println()
 	log.Println("Type: \t\t\t", 		 reflect.TypeOf(statusResponse))
-	log.Println("Status: \t\t", 		 *statusResponse.Status)
-	log.Println("Status Message:\t",	 *statusResponse.Message)
+	log.Println("Status: \t\t", 		 statusResponse.Status)
+	log.Println("Status Message:\t",	 statusResponse.Message)
 
 }

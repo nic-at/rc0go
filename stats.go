@@ -15,29 +15,29 @@ type ZoneStatsService service
 
 //
 type PerDay struct {
-	Date      *string `json:"date"`
-	Queries   *int 	  `json:"qcount"`
-	NXDomains *int    `json:"nxcount"`
+	Date      string `json:"date, omitempty"`
+	Queries   int 	  `json:"qcount, omitempty"`
+	NXDomains int    `json:"nxcount, omitempty"`
 }
 
 //
 type Magnitude struct {
-	Date      *string `json:"date"`
-	Magnitude *string `json:"mag"`
+	Date      string `json:"date, omitempty"`
+	Magnitude string `json:"mag, omitempty"`
 }
 
 //
 type Query struct {
-	Name  *string `json:"qname"`
-	Type  *string `json:"qtype"`
-	Count *int    `json:"qc"`
+	Name  string `json:"qname, omitempty"`
+	Type  string `json:"qtype, omitempty"`
+	Count int    `json:"qc, omitempty"`
 }
 
 //
 type NXDomain struct {
-	Name  *string `json:"qname"`
-	Type  *string `json:"qtype"`
-	Count *int `json:"qc"`
+	Name  string `json:"qname, omitempty"`
+	Type  string `json:"qtype, omitempty"`
+	Count int `json:"qc, omitempty"`
 }
 
 // Get the total number of queries and the number of queries answered with NXDOMAIN for the given zone for the last 180 days (max.)
@@ -156,7 +156,7 @@ func statsRequest(s *ZoneStatsService, zone string, operation string) (*resty.Re
 			return nil, err
 		}
 
-		return nil, errors.New(*status.Message)
+		return nil, errors.New(status.Message)
 	}
 
 	return resp, nil

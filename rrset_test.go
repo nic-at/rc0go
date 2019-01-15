@@ -59,18 +59,18 @@ func TestRRSetService_Create(t *testing.T) {
 
 	rrsetCreate := []*RRSetEdit{
 			{
-				Name: String("www.testzone1.at."),
-				Type: String("A"),
-				ChangeType: String(ChangeTypeADD),
+				Name: "www.testzone1.at.",
+				Type: "A",
+				ChangeType: ChangeTypeADD,
 				Records: []*Record{
 					{
-						Content:String("10.10.0.1"),
+						Content:"10.10.0.1",
 					},
 				},
 			},
 		}
 
-	want := &StatusResponse{Status: String("ok"), Message: String("RRsets updated")}
+	want := &StatusResponse{Status: "ok", Message: "RRsets updated"}
 
 	mux.HandleFunc(RC0ZoneRRSets, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "PATCH")
@@ -110,22 +110,22 @@ func TestRRSetService_Edit(t *testing.T) {
 
 	rrsetUpdate := []*RRSetEdit{
 		{
-			Name: String("www.testzone1.at."),
-			Type: String("A"),
-			ChangeType: String(ChangeTypeUPDATE),
+			Name: "www.testzone1.at.",
+			Type: "A",
+			ChangeType: ChangeTypeUPDATE,
 			Records: []*Record{
 				{
-					Content:String("10.10.0.10"),
+					Content:"10.10.0.10",
 				},
 				{
-					Content:String("10.10.0.20"),
-					Disabled: Bool(true),
+					Content: "10.10.0.20",
+					Disabled: true,
 				},
 			},
 		},
 	}
 
-	want := &StatusResponse{Status: String("ok"), Message: String("RRsets updated")}
+	want := &StatusResponse{Status: "ok", Message: "RRsets updated"}
 
 	mux.HandleFunc(RC0ZoneRRSets, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "PATCH")
@@ -165,13 +165,13 @@ func TestRRSetService_Delete(t *testing.T) {
 
 	rrsetDelete := []*RRSetEdit{
 		{
-			Name: String("www.testzone1.at."),
-			Type: String("A"),
-			ChangeType: String(ChangeTypeDELETE),
+			Name: "www.testzone1.at.",
+			Type: "A",
+			ChangeType: ChangeTypeDELETE,
 		},
 	}
 
-	want := &StatusResponse{Status: String("ok"), Message: String("RRsets updated")}
+	want := &StatusResponse{Status: "ok", Message: "RRsets updated"}
 
 	mux.HandleFunc(RC0ZoneRRSets, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "PATCH")

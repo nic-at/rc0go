@@ -18,32 +18,32 @@ type ZoneManagementService service
 
 // Zone struct
 type Zone struct {
-	ID                    *int      	`json:"id"`
-	Domain                *string   	`json:"domain"`
-	Type                  *string   	`json:"type"`
-	Masters               *[]string 	`json:"masters"`
-	Serial                *interface{}  `json:"serial"`	// @todo: fix api
-	LastCheck             *string   	`json:"last_check"`
-	DNSSECStatus          *string   	`json:"dnssec_status"`
-	DNSSECStatusDetail    *string   	`json:"dnssec_status_detail"`
-	DNSSECKSKStatus       *string   	`json:"dnssec_ksk_status"`
-	DNSSECKSKStatusDetail *string   	`json:"dnssec_ksk_status_detail"`
-	DNSSECDS              *string   	`json:"dnssec_ds"`
-	DNSSECDNSKey          *string   	`json:"dnssec_dns_key"`
-	DNSSECSafeToUnsign    *string   	`json:"dnssec_sage_to_unsign"`
+	ID                    int      		`json:"id, omitempty"`
+	Domain                string   		`json:"domain, omitempty"`
+	Type                  string   		`json:"type, omitempty"`
+	Masters               []string 		`json:"masters, omitempty"`
+	Serial                int  			`json:"serial, omitempty"`
+	LastCheck             string   		`json:"last_check, omitempty"`
+	DNSSECStatus          string   		`json:"dnssec_status, omitempty"`
+	DNSSECStatusDetail    string   		`json:"dnssec_status_detail, omitempty"`
+	DNSSECKSKStatus       string   		`json:"dnssec_ksk_status, omitempty"`
+	DNSSECKSKStatusDetail string   		`json:"dnssec_ksk_status_detail, omitempty"`
+	DNSSECDS              string   		`json:"dnssec_ds, omitempty"`
+	DNSSECDNSKey          string   		`json:"dnssec_dns_key, omitempty"`
+	DNSSECSafeToUnsign    string   		`json:"dnssec_sage_to_unsign, omitempty"`
 }
 
 // ZoneCreate is used for adding a new zone to rc0
 type ZoneCreate struct {
-	Domain 	*string   `json:"domain"`
-	Type 	*string   `json:"type"`
-	Masters *[]string `json:"masters"`
+	Domain 	string   `json:"domain, omitempty"`
+	Type 	string   `json:"type, omitempty"`
+	Masters []string `json:"masters, omitempty"`
 }
 
 // ZoneEdit is used to change the type (slave/master) of the zone on rc0
 type ZoneEdit struct {
-	Type 	*string   `json:"type"`
-	Masters *[]string `json:"masters"`
+	Type 	string   `json:"type, omitempty"`
+	Masters []string `json:"masters, omitempty"`
 }
 
 // List all zones
@@ -141,10 +141,7 @@ func (s *ZoneManagementService) Edit(zone string, zoneEdit *ZoneEdit) (*StatusRe
 
 	body := make(map[string]interface{})
 
-	if zoneEdit.Type != nil {
-		body["type"] = zoneEdit.Type
-	}
-
+	body["type"] = zoneEdit.Type
 	body["masters"] = zoneEdit.Masters
 
 	resp, err := s.client.NewRequest().
