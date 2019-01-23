@@ -16,6 +16,15 @@ import (
 // rcode0 API docs: https://my.rcodezero.at/api-doc/#api-zone-management
 type ZoneManagementService service
 
+type ZoneManagementServiceInterface interface {
+	List(options *ListOptions) (zones []*Zone, page *Page, err error)
+	Get(zone string) (*Zone, error)
+	Create(zoneCreate *ZoneCreate) (*StatusResponse, error)
+	Edit(zone string, zoneEdit *ZoneEdit) (*StatusResponse,  error)
+	Delete(zone string) (*StatusResponse, error)
+	Transfer(zone string) (*StatusResponse, error)
+}
+
 // Zone struct
 type Zone struct {
 	ID                    int      		`json:"id, omitempty"`
@@ -49,9 +58,11 @@ type ZoneEdit struct {
 // List all zones
 //
 // rcode0 API docs: https://my.rcodezero.at/api-doc/#api-zone-management-zones-get
-func (s *ZoneManagementService) List() (zones []*Zone, page *Page, err error) {
+func (s *ZoneManagementService) List(options *ListOptions) (zones []*Zone, page *Page, err error) {
 
 	resp, err := s.client.NewRequest().
+		SetQueryParam("page_size", 	options.PageNumberAsString()).
+		SetQueryParam("page", 		options.PageNumberAsString()).
 		Get(
 			s.client.BaseURL.String() +
 				s.client.APIVersion +

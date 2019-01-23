@@ -11,6 +11,7 @@ import (
 	"gopkg.in/resty.v1"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -19,9 +20,16 @@ const (
 	defaultAPIVersion = "v1"
 	userAgent         = "rc0go"
 
+	defaultPageSize	  = 100
+
 	headerRateLimit     = "X-RateLimit-Limit"
 	headerRateRemaining = "X-RateLimit-Remaining"
 )
+
+type ClientInterface interface {
+	NewRequest() *resty.Request
+	ResponseToRC0StatusResponse(response *resty.Response) (*StatusResponse, error)
+}
 
 type Client struct {
 
@@ -45,8 +53,8 @@ type Client struct {
 	// Reuse a single struct instead of allocating one for each service on the heap.
 	common service
 
-	Zones  	  *ZoneManagementService
-	RRSet  	  *RRSetService
+	Zones  	  ZoneManagementServiceInterface
+	RRSet  	  RRSetServiceInterface
 	DNSSEC    *DNSSECService
 	ZoneStats *ZoneStatsService
 	AccStats  *AccountStatsService
@@ -64,6 +72,10 @@ type StatusResponse struct {
 	Message string `json:"message, omitempty"`
 }
 
+func (sr *StatusResponse) HasError() bool {
+	return !strings.EqualFold(sr.Status, "ok")
+}
+
 type Page struct {
 	Data        []interface{} `json:"data"`
 	CurrentPage int           `json:"current_page, omitempty"`
@@ -75,6 +87,59 @@ type Page struct {
 	PrevPageURL string        `json:"prev_page_url, omitempty"`
 	To          int           `json:"to, omitempty"`
 	Total       int           `json:"total, omitempty"`
+}
+
+type ListOptions struct {
+	pageSize 	int
+	pageNumber	int
+}
+
+func NewListOptions() *ListOptions {
+	return &ListOptions{pageNumber: 1, pageSize: defaultPageSize}
+}
+
+func (o *ListOptions) SetPageSize(size int) {
+	if size < 1 {
+		o.pageSize = 1
+	}
+
+	o.pageSize = size
+}
+
+func (o *ListOptions) PageSize() int {
+	if o.pageSize < 1 {
+		return 1
+	}
+
+	return o.pageSize
+}
+
+func (o *ListOptions) PageSizeAsString() string {
+	return strconv.Itoa(o.pageSize)
+}
+
+func (o *ListOptions) SetPageNumber(number int) {
+	if o.pageNumber < 1 {
+		o.pageNumber = 1
+	}
+
+	o.pageNumber = number
+}
+
+func (o *ListOptions) PageNumber() int {
+	if o.pageNumber < 1 {
+		return 1
+	}
+
+	return o.pageNumber
+}
+
+func (o *ListOptions) PageNumberAsString() string {
+	return strconv.Itoa(o.pageNumber)
+}
+
+func (p* Page) IsLastPage() bool {
+	return p.CurrentPage == p.LastPage || p.CurrentPage > p.LastPage
 }
 
 // NewClient returns a new rcode0 API client.

@@ -27,8 +27,8 @@ zone, err := rc0client.Zones.Get("rcodezero.at")
 
 // Add an "A" DNS resource record to the
 rrsetCreate := []*rc0go.RRSetEdit{{
-    Type: 		"A",
-    Name: 		"www.rcodezero.at.",
+    Type:   "A",
+    Name: 	"www.rcodezero.at.",
     ChangeType: rc0go.ChangeTypeADD,
     Records:    []*rc0go.Record{{
         Content: "10.10.0.1",

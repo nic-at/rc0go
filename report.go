@@ -18,7 +18,7 @@ type ProbZone struct {
 	DNSSEC    string 		`json:"dnssec, omitempty"`
 	Created   string 		`json:"created, omitempty"`
 	LastCheck string 	 	`json:"last_check, omitempty"`
-	Serial    interface{} 	`json:"serial, omitempty"`
+	Serial    int 			`json:"serial, omitempty"`
 	Masters   []string 	 	`json:"masters, omitempty"`
 }
 
@@ -28,6 +28,8 @@ type ProbZone struct {
 func (s *ReportService) ProblematicZones() ([]*ProbZone, *Page, error) {
 
 	resp, err := s.client.NewRequest().
+		//SetQueryParam("page_size", options.GetPageNumberAsString()). @todo: add this
+		//SetQueryParam("page", options.GetPageNumberAsString()).
 		Get(
 			s.client.BaseURL.String() +
 				s.client.APIVersion +

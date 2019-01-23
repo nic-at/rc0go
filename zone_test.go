@@ -35,7 +35,7 @@ func TestZoneManagementServiceList(t *testing.T) {
 	})
 
 	// Here the library method should return the sample data
-	zones, _, err := client.Zones.List()
+	zones, _, err := client.Zones.List(NewListOptions())
 
 	if err != nil {
 		t.Errorf("Zones.List returned error: %v", err)

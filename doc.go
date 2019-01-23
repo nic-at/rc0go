@@ -30,7 +30,7 @@ access different parts of the rcode0 Anycast DNS API. For example:
 	zone, err := rc0client.Zones.Get("rcodezero.at")
 
 	// Add an "A" DNS resource record to the zone
-	rrsetCreate := []*rc0go.RRSetEdit{{
+	rrsetCreate := []*rc0go.RRSetChange{{
 		Type: 		"A",
 		Name: 		"www.rcodezero.at.",
 		ChangeType: rc0go.ChangeTypeADD,

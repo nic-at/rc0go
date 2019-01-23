@@ -27,7 +27,7 @@ func TestRRSetService_List(t *testing.T) {
 		_, _ = fmt.Fprint(w, string(dat))
 	})
 
-	rrset, _, err := client.RRSet.List("testzone1.at")
+	rrset, _, err := client.RRSet.List("testzone1.at", NewListOptions())
 
 	if err != nil {
 		t.Errorf("RRSet.List returned error: %v", err)
@@ -57,7 +57,7 @@ func TestRRSetService_Create(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	rrsetCreate := []*RRSetEdit{
+	rrsetCreate := []*RRSetChange{
 			{
 				Name: "www.testzone1.at.",
 				Type: "A",
@@ -77,7 +77,7 @@ func TestRRSetService_Create(t *testing.T) {
 
 		body, err := ioutil.ReadAll(r.Body)
 
-		var rrsetCreateReceived []*RRSetEdit
+		var rrsetCreateReceived []*RRSetChange
 		_ = json.Unmarshal(body, &rrsetCreateReceived)
 
 		if err != nil {
@@ -108,7 +108,7 @@ func TestRRSetService_Edit(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	rrsetUpdate := []*RRSetEdit{
+	rrsetUpdate := []*RRSetChange{
 		{
 			Name: "www.testzone1.at.",
 			Type: "A",
@@ -132,7 +132,7 @@ func TestRRSetService_Edit(t *testing.T) {
 
 		body, err := ioutil.ReadAll(r.Body)
 
-		var rrsetUpdateReceived []*RRSetEdit
+		var rrsetUpdateReceived []*RRSetChange
 		_ = json.Unmarshal(body, &rrsetUpdateReceived)
 
 		if err != nil {
@@ -163,7 +163,7 @@ func TestRRSetService_Delete(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()
 
-	rrsetDelete := []*RRSetEdit{
+	rrsetDelete := []*RRSetChange{
 		{
 			Name: "www.testzone1.at.",
 			Type: "A",
@@ -178,7 +178,7 @@ func TestRRSetService_Delete(t *testing.T) {
 
 		body, err := ioutil.ReadAll(r.Body)
 
-		var rrsetDeleteReceived []*RRSetEdit
+		var rrsetDeleteReceived []*RRSetChange
 		_ = json.Unmarshal(body, &rrsetDeleteReceived)
 
 		if err != nil {

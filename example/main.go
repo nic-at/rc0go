@@ -33,7 +33,7 @@ func main() {
 	}
 
 	// List all managed zones
-	zones, _, err := rc0client.Zones.List()
+	zones, _, err := rc0client.Zones.List(rc0go.NewListOptions())
 
 	if err != nil {
 		log.Fatalf("failed to list zones: %v", err)
@@ -100,7 +100,7 @@ func main() {
 
 	records = append(records, record2)
 
-	rrsetCreate := []*rc0go.RRSetEdit{{
+	rrsetCreate := []*rc0go.RRSetChange{{
 		Type: 		"A",
 		Name: 		"www.golib-example.at.",
 		ChangeType: rc0go.ChangeTypeADD,
