@@ -61,7 +61,7 @@ type ZoneEdit struct {
 func (s *ZoneManagementService) List(options *ListOptions) (zones []*Zone, page *Page, err error) {
 
 	resp, err := s.client.NewRequest().
-		SetQueryParam("page_size", 	options.PageNumberAsString()).
+		SetQueryParam("page_size", 	options.PageSizeAsString()).
 		SetQueryParam("page", 		options.PageNumberAsString()).
 		Get(
 			s.client.BaseURL.String() +

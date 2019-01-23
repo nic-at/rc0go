@@ -60,7 +60,7 @@ const (
 func (s *RRSetService) List(zone string, options *ListOptions) ([]*RRType, *Page, error) {
 
 	resp, err := s.client.NewRequest().
-		SetQueryParam("page_size",	options.PageNumberAsString()).
+		SetQueryParam("page_size",	options.PageSizeAsString()).
 		SetQueryParam("page", 		options.PageNumberAsString()).
 		SetPathParams(
 			map[string]string{
