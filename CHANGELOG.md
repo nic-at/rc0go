@@ -6,9 +6,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.0] - 2019-01-23
+
+### Added
+
+- Pagination support and ListOption struct
+- Encryption support for RRSetService
+
+### Changed
+
+- Client services (Zones, RRSet) to implement interface
+
 ## [1.0.0] - 2019-01-15
 
 - Initial stable release
 
 [Unreleased]: https://github.com/nic-at/rc0go/compare/v1.0.0...HEAD
+[1.1.0]: https://github.com/nic-at/rc0go/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/nic-at/rc0go/compare/v1.0.0...v1.0.0
