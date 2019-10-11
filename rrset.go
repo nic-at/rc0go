@@ -44,7 +44,8 @@ type Record struct {
 type RRSetChange struct {
 	Name 		string    `json:"name, omitempty"`
 	Type 		string    `json:"type, omitempty"`
-	ChangeType  string    `json:"changetype, omitempty"`
+	ChangeType  	string    `json:"changetype, omitempty"`
+	TTL     	int       `json:"ttl,omitempty"`
 	Records 	[]*Record `json:"records, omitempty"`
 }
 
